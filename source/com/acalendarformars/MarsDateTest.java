@@ -7,8 +7,8 @@ public class MarsDateTest {
     public static void main(String[] args) {
         MarsDate marsDate = new MarsDate();
 
-        // Get the Months of Mars
-        TreeMap<Integer, String> monthsOfMars = marsDate.getMonthsOfMars();
-        System.out.println(monthsOfMars); 
+		// Call static variables
+		System.out.println("SOLS_IN_YEAR:" + MarsDate.SOLS_IN_YEAR);
+		System.out.println("MONTHS_OF_MARS:" + MarsDate.MONTHS_OF_MARS);
     }
 }
