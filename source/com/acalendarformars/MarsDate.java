@@ -60,13 +60,13 @@ public class MarsDate {
      *    (Roman Numberal) example - 29 Pisces XLIX
 	 * @param earthDate Earth Date equivalent of requesteed Martian Date
      */ 
-	private String getMarsDate(Calendar earthDateCalendar) {
+	private String getMarsDate(Calendar earthCalendar) {
 		// Get the month, day, year, and day of year
-		int month = Calendar.MONTH;
-		int day = Calendar.DAY_OF_MONTH;
-		int year = Calendar.YEAR;
-		int dayOfYear = Calendar.DAY_OF_YEAR;
-		int daysInEarthYear = earthDateCalendar.getActualMaximum(Calendar.DAY_OF_YEAR);
+		int month = earthCalendar.get(Calendar.MONTH) + 1;
+		int day = earthCalendar.get(Calendar.DAY_OF_MONTH);
+		int year = earthCalendar.get(Calendar.YEAR);
+		int dayOfYear = earthCalendar.get(Calendar.DAY_OF_YEAR);
+		int daysInEarthYear = earthCalendar.getActualMaximum(Calendar.DAY_OF_YEAR);
 
 		// calculate contants for Martian Date Calculation
 		double earthYearComplete = (dayOfYear/daysInEarthYear);
@@ -76,6 +76,26 @@ public class MarsDate {
 		double marsDateComplete = marsDate - marsYear;
 		long dayOfYearMars = Math.round(SOLS_IN_YEAR * marsDateComplete);
 
-		return "46 Libra XXXI";
+		// Calculate the Martian month and day of month
+		String monthMars = getMonthOfMars(dayOfYearMars);
+		String dayMars = getMonthMarsDayOfMonth(dayOfYearMars);
+		String romanMarsYear = RomanNumber.toRoman((int) marsYear);
+		String formatedDateMars = String.format("%s %s %s", dayMars, monthMars, romanMarsYear);
+		return formatedDateMars;
+	}
+
+	/**
+     * Return the string for the martian month for the supplied day of the year.
+	 *
+	 * @param dayOfYear Day of the Martian Year.
+     */ 
+	private String getMonthOfMars(long dayOfYear) {
+
+		return "Libra";
+	}
+
+	private String getMonthMarsDayOfMonth(long dayOfYear) {
+
+		return "47";
 	}
 }
