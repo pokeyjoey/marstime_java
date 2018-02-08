@@ -8,7 +8,9 @@
 */
 package com.acalendarformars;
 
+import java.util.Collection;
 import java.util.TreeMap;
+import java.util.Map;
 import java.util.Calendar;
 
 public class MarsDate {
@@ -74,7 +76,8 @@ public class MarsDate {
 		double marsDate = ((8.0/15.0) * (earthDate - 1961.0)) + 1.0;
 		double marsYear = Math.floor(marsDate);
 		double marsDateComplete = marsDate - marsYear;
-		long dayOfYearMars = Math.round(SOLS_IN_YEAR * marsDateComplete);
+		int dayOfYearMars = (int) Math.round(SOLS_IN_YEAR * marsDateComplete);
+		System.out.println("marsDateComplete: " + marsDateComplete + " dayOfYearMars: " + dayOfYearMars);
 
 		// Calculate the Martian month and day of month
 		String monthMars = getMonthOfMars(dayOfYearMars);
@@ -89,13 +92,60 @@ public class MarsDate {
 	 *
 	 * @param dayOfYear Day of the Martian Year.
      */ 
-	private String getMonthOfMars(long dayOfYear) {
+	private String getMonthOfMars(long dayOfYearMars) {
 
-		return "Libra";
+		String monthOfMars = "Set me";
+
+		// Iterate through MONTHS_OF_MARS until 
+	    // the dayOfYear is less than the lastDayOfMonth.
+		// - matching Month contains that dayOfYearMars
+		for (Map.Entry<Integer,String> entry : MONTHS_OF_MARS.entrySet()) {
+			Integer lastDayOfMonthMars = entry.getKey();
+			String marsMonthName = entry.getValue();
+			if (dayOfYearMars <= lastDayOfMonthMars) {
+				monthOfMars = marsMonthName;
+				break;
+			}
+		}
+
+		return monthOfMars;
 	}
 
-	private String getMonthMarsDayOfMonth(long dayOfYear) {
+	/**
+     * Return the string for the date of the martian month for the supplied day of the year.
+	 *
+	 * @param dayOfYear Day of the Martian Year.
+     */ 
 
-		return "47";
+	private String getMonthMarsDayOfMonth(int dayOfYearMars) {
+		System.out.println("dayOfYearMars: " + dayOfYearMars);
+
+        // initialize to Gemini the first month of the Martian year
+        int lastDayOfPreviousMonth = 61;
+        int dayOfMonth = 0;
+
+        // if we are in the first month Gemini,
+		//  dayOfMonth equals the dayOfYearMars.
+        if (dayOfYearMars <= 61) {
+            dayOfMonth = dayOfYearMars;
+            return Integer.toString(dayOfMonth);
+		};
+
+        // determine which month we are in so we 
+		// can calculate the day of the month.
+   		for (Map.Entry<Integer,String> entry : MONTHS_OF_MARS.entrySet()) {
+			Integer lastDayOfMonthMars = entry.getKey();
+			String marsMonthName = entry.getValue();
+			System.out.println("lastDayOfMonthMars: " + lastDayOfMonthMars);
+			System.out.println("marsMonthName: " + marsMonthName);
+            if (dayOfYearMars <= lastDayOfMonthMars) {
+                dayOfMonth = (dayOfYearMars - (lastDayOfPreviousMonth + 1)) + 1;
+                break;
+			};
+
+            lastDayOfPreviousMonth = lastDayOfMonthMars;
+		}
+
+        return Integer.toString(dayOfMonth);
 	}
 }
