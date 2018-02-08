@@ -13,7 +13,7 @@ import java.util.TreeMap;
 import java.util.Map;
 import java.util.Calendar;
 
-public class MarsDate {
+public class MarsDateDebug {
     
     public static final int SOLS_IN_YEAR = 669;
     public static final TreeMap<Integer, String> MONTHS_OF_MARS = new TreeMap<Integer, String>();
@@ -40,7 +40,7 @@ public class MarsDate {
         MONTHS_OF_MARS.put(669, "Taurus");
 	}
 
-    public MarsDate() {
+    public MarsDateDebug() {
         System.out.println("Get your Ass to Mars !!");
 		System.out.println("Todays Mars Date: " + today());
     }
@@ -69,6 +69,12 @@ public class MarsDate {
 		int year = earthCalendar.get(Calendar.YEAR);
 		int dayOfYear = earthCalendar.get(Calendar.DAY_OF_YEAR);
 		double daysInEarthYear = (double) earthCalendar.getActualMaximum(Calendar.DAY_OF_YEAR);
+		System.out.println("month: " + month);
+		System.out.println("day: " + day);
+		System.out.println("year: " + year);
+		System.out.println("dayOfYear: " + dayOfYear);
+		System.out.println("daysInEarthYear: " + daysInEarthYear);
+		System.out.println();
 
 		// calculate contants for Martian Date Calculation
 		double earthYearComplete = (dayOfYear/daysInEarthYear);
@@ -77,12 +83,23 @@ public class MarsDate {
 		double marsYear = Math.floor(marsDate);
 		double marsDateComplete = marsDate - marsYear;
 		int dayOfYearMars = (int) Math.round(SOLS_IN_YEAR * marsDateComplete);
+		System.out.println("earthYearComplete: " + earthYearComplete);
+		System.out.println("earthDate: " + earthDate);
+		System.out.println("marsDate: " + marsDate);
+		System.out.println("marsYear: " + marsYear);
+		System.out.println("marsDateComplete: " + marsDateComplete);
+		System.out.println("dayOfYearMars: " + dayOfYearMars);
+		System.out.println();
 
 		// Calculate the Martian month and day of month
 		String monthMars = getMonthOfMars(dayOfYearMars);
 		String dayMars = getMonthMarsDayOfMonth(dayOfYearMars);
 		String romanMarsYear = RomanNumber.toRoman((int) marsYear);
 		String formatedDateMars = String.format("%s %s %s", dayMars, monthMars, romanMarsYear);
+		System.out.println("monthMars: " + monthMars);
+		System.out.println("dayMars: " + dayMars);
+		System.out.println("romanMarsYear: " + romanMarsYear);
+		System.out.println("formatedDateMars: " + formatedDateMars);
 
 		return formatedDateMars;
 	}
