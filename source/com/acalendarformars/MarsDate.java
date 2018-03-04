@@ -1,5 +1,5 @@
 /**
-* This program calculates the current data on Mars according to a 
+* This program calculates the current date on Mars according to a 
 * calendar invented by Dr. Robert Zubrin.
 *
 * @author Jeff Roche
@@ -55,12 +55,12 @@ public class MarsDate {
 		return todaysMartianDate;
 	}
 
-	/**
+    /**
      * Return martian date for the Zubrin Calendar when
-	 * provided with a Calendar object for its corresponding Earth Date.
+     * provided with a Calendar object for its corresponding Earth Date.
      * - returns date of the form: year-month- day of month
      *    (Roman Numberal) example - 29 Pisces XLIX
-	 * @param earthDate Earth Date equivalent of requesteed Martian Date
+     * @param earthDate Earth Date equivalent of requesteed Martian Date
      */ 
 	private String getMarsDate(Calendar earthCalendar) {
 		// Get the month, day, year, and day of year
@@ -87,10 +87,10 @@ public class MarsDate {
 		return formatedDateMars;
 	}
 
-	/**
+    /**
      * Return the string for the martian month for the supplied day of the year.
-	 *
-	 * @param dayOfYear Day of the Martian Year.
+     *
+     * @param dayOfYear Day of the Martian Year.
      */ 
 	private String getMonthOfMars(long dayOfYearMars) {
 
@@ -111,10 +111,10 @@ public class MarsDate {
 		return monthOfMars;
 	}
 
-	/**
+    /**
      * Return the string for the date of the martian month for the supplied day of the year.
-	 *
-	 * @param dayOfYear Day of the Martian Year.
+     *
+     * @param dayOfYear Day of the Martian Year.
      */ 
 
 	private String getMonthMarsDayOfMonth(int dayOfYearMars) {
